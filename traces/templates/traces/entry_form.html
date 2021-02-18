@@ -1,0 +1,78 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Andrew Daniel">
+    <title>Coffeebeerian Dine In List</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'traces/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="{% static 'traces/css/form-validation.css' %}" rel="stylesheet">
+  </head>
+  <body class="bg-light">
+    
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="{% static 'traces/img/logo.png' %}" alt="Coffeebeerian" width="281" height="57">
+      <h2>COFFEEBEERIAN DINE IN LIST</h2>
+      <p class="lead">We do need people to fill out this form before ordering, to be precautious with the situation at the moment. please do
+      help us and we will serve you right away! This data will be safe, and can only be access by Coffeebeerian. Thank you</p>
+    </div>
+
+    <div class="row g-3">
+      <div class="col">
+        <form class="needs-validation" novalidate>
+          <div class="row gy-3">
+            {% for question in questions %}
+              <div class="col-12">
+                <label for="address" class="form-label">{{ question.input_title }}</label>
+                <input type="text" class="form-control" id="{{ question.name }}" name="{{ question.name }}" placeholder="Your answer" required>
+                <div class="invalid-feedback">
+                  This field is required
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <hr class="my-4">
+
+          <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; Coffeebeerian</p>
+  </footer>
+</div>
+
+
+    <script src="{% static 'traces/js/bootstrap.bundle.min.js' %}"></script>
+
+      <script src="{% static 'traces/js/form-validation.js' %}"></script>
+  </body>
+</html>
