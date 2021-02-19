@@ -1,0 +1,54 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Andrew Daniel">
+    <title>Coffeebeerian Dine In List</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'traces/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    {% block css %}{% endblock %}
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'traces/css/form-validation.css' %}" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <div class="container">
+        {% block content %}{% endblock %}
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; Coffeebeerian</p>
+        </footer>
+    </div>
+</div>
+
+
+<script src="{% static 'traces/js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'traces/js/form-validation.js' %}"></script>
+</body>
+
+</html>

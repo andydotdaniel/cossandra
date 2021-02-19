@@ -1,0 +1,25 @@
+{% extends 'traces/template.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main style="margin: auto;">
+    <div class="py-5 text-center">
+        <h1>Welcome!</h1>
+        <p class="lead">We hope you have a good time.</p>
+    </div>
+</main>
+{% endblock %}
