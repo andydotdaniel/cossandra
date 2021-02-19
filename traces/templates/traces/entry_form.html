@@ -23,7 +23,7 @@
             {% for question in questions %}
               <div class="col-12">
                 <label for="address" class="form-label">{{ question.input_title }}</label>
-                <input type="text" class="form-control" id="{{ question.name }}" name="{{ question.name }}" placeholder="Your answer" required>
+                <input type="{{ question.input_type }}" class="form-control" id="{{ question.name }}" name="{{ question.name }}" placeholder="Your answer" required>
                 <div class="invalid-feedback">
                   This field is required
                 </div>

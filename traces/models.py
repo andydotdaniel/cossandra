@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 
 class Customer(models.Model):
@@ -5,8 +6,14 @@ class Customer(models.Model):
     date_created = models.DateTimeField()
 
 class Question(models.Model):
+
+    class FieldInputType(models.TextChoices):
+        NUMBER = 'number', _('Number')
+        TEXT = 'text', _('Text')
+
     name = models.CharField(max_length=200, unique=True)
     input_title = models.CharField(max_length=200)
+    input_type = models.CharField(max_length=200, choices=FieldInputType.choices, default=FieldInputType.TEXT)
 
     def __str__(self):
         return self.input_title
