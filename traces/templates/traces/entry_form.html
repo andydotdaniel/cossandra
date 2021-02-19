@@ -47,6 +47,11 @@
       <div class="col">
         <form class="needs-validation" novalidate>
           <div class="row gy-3">
+            <div class="col-12">
+              <label for="address" class="form-label">Phone Number</label>
+              <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ phone_number }}" required disabled>
+            </div>
+
             {% for question in questions %}
               <div class="col-12">
                 <label for="address" class="form-label">{{ question.input_title }}</label>

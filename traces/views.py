@@ -8,4 +8,8 @@ def index(request):
 
 def entry(request):
     questions = Question.objects.all()
-    return render(request, 'traces/entry_form.html', { 'questions': questions })
+    context = {
+        'questions': questions,
+        'phone_number': request.GET['phone_number']
+    }
+    return render(request, 'traces/entry_form.html', context)
