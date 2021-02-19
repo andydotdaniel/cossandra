@@ -9,7 +9,7 @@ class Question(models.Model):
     input_title = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name
+        return self.input_title
 
 class Entry(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
