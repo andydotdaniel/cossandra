@@ -40,13 +40,14 @@
       <img class="d-block mx-auto mb-4" src="{% static 'traces/img/logo.png' %}" alt="Coffeebeerian" width="281" height="57">
       <h2>COFFEEBEERIAN DINE IN LIST</h2>
       <p class="lead">We do need people to fill out this form before ordering, to be precautious with the situation at the moment. please do
-      help us and we will serve you right away! This data will be safe, and can only be access by Coffeebeerian. Thank you</p>
+      help us and we will serve you right away! This data will be safe, and can only be access by Coffeebeerian. Thank you, you will only need to do this once.</p>
     </div>
 
     <div class="row g-3">
       <div class="col">
         <form class="needs-validation" novalidate>
           <div class="row gy-3">
+            {% csrf_token %}
             <div class="col-12">
               <label for="address" class="form-label">Phone Number</label>
               <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ phone_number }}" required disabled>
