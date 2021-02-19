@@ -10,6 +10,7 @@ class Question(models.Model):
     class FieldInputType(models.TextChoices):
         NUMBER = 'number', _('Number')
         TEXT = 'text', _('Text')
+        EMAIL = 'email', _('Email')
 
     name = models.CharField(max_length=200, unique=True)
     input_title = models.CharField(max_length=200)
