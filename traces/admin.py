@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import TracePoint
+from .models import Question
 
-admin.site.register(TracePoint)
+admin.site.register(Question)

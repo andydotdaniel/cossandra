@@ -1,11 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .models import TracePoint
+from .models import Question
 
 def index(request):
     return HttpResponse("Traces Index")
 
 def entry(request):
-    questions = TracePoint.objects.all()
+    questions = Question.objects.all()
     return render(request, 'traces/entry_form.html', { 'questions': questions })

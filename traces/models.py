@@ -4,7 +4,7 @@ class Customer(models.Model):
     phone_number = models.CharField(max_length=200, unique=True)
     date_created = models.DateTimeField()
 
-class TracePoint(models.Model):
+class Question(models.Model):
     name = models.CharField(max_length=200, unique=True)
     input_title = models.CharField(max_length=200)
 
@@ -13,7 +13,7 @@ class TracePoint(models.Model):
 
 class Entry(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    trace_point = models.ForeignKey(TracePoint, on_delete=models.RESTRICT)
+    question = models.ForeignKey(Question, on_delete=models.RESTRICT)
     value = models.CharField(max_length=200)
 
     def __str__(self):
