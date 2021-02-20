@@ -1,4 +1,5 @@
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 from django.db import models
 
 class Customer(models.Model):
@@ -30,3 +31,6 @@ class Entry(models.Model):
 class Visit(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     date_created = models.DateTimeField()
+
+    def __str__(self):
+        return self.customer.phone_number + ' on ' +  timezone.localtime(self.date_created).strftime('%d/%m/%Y, %H:%M:%S')
