@@ -6,6 +6,9 @@ class Customer(models.Model):
     phone_number = models.CharField(max_length=200, unique=True)
     date_created = models.DateTimeField()
 
+    def __str__(self):
+        return self.phone_number
+
 class Question(models.Model):
 
     class FieldInputType(models.TextChoices):
