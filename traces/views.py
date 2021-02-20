@@ -9,12 +9,15 @@ def index(request):
 
 def check(request):
     phone_number = request.POST['phone_number']
+    group_size = request.POST['group_size']
     try:
         customer = Customer.objects.get(phone_number=phone_number)
     except (KeyError, Customer.DoesNotExist):
-        return HttpResponseRedirect(reverse('traces:entry') + '?phone_number=' + phone_number)
+        phone_number_param = 'phone_number=' + phone_number
+        group_size_param = 'group_size=' + group_size
+        return HttpResponseRedirect(reverse('traces:entry') + '?' + phone_number_param + '&' + group_size_param)
     else:
-        visit = Visit(customer=customer, date_created=timezone.now())
+        visit = Visit(customer=customer, group_size=group_size, date_created=timezone.now())
         visit.save()
         return HttpResponseRedirect(reverse('traces:welcome'))
 
@@ -36,7 +39,7 @@ def __saveEntry(request):
         entry = Entry(customer=customer, question=question, value=request.POST[question.name])
         entry.save()
 
-    visit = Visit(customer=customer, date_created=now)
+    visit = Visit(customer=customer, group_size=request.POST['group_size'], date_created=now)
     visit.save()
 
     return HttpResponseRedirect(reverse('traces:welcome'))
@@ -45,7 +48,8 @@ def __showEntryForm(request):
     questions = Question.objects.all()
     context = {
         'questions': questions,
-        'phone_number': request.GET['phone_number']
+        'phone_number': request.GET['phone_number'],
+        'group_size': request.GET['group_size']
     }
     return render(request, 'traces/entry_form.html', context)
 

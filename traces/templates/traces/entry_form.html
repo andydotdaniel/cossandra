@@ -16,13 +16,19 @@
           <div class="row gy-3">
             {% csrf_token %}
             <div class="col-12">
-              <label for="address" class="form-label">Phone Number</label>
+              <label for="phone_number" class="form-label">Phone Number</label>
               <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ phone_number }}" required readonly="readonly">
+            </div>
+
+            <div class="col-12">
+              <label for="group_size" class="form-label">Number of people you came with</label>
+              <input type="number" class="form-control" id="group_size" name="group_size" value="{{ group_size }}" required
+                readonly="readonly">
             </div>
 
             {% for question in questions %}
               <div class="col-12">
-                <label for="address" class="form-label">{{ question.input_title }}</label>
+                <label for="{{ question.name }}" class="form-label">{{ question.input_title }}</label>
                 <input type="{{ question.input_type }}" class="form-control" id="{{ question.name }}" name="{{ question.name }}" placeholder="Your answer" required>
                 <div class="invalid-feedback">
                   This field is required
