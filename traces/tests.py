@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.shortcuts import reverse
 from django.utils import timezone
 
-from .models import Customer, Visit
+from .models import Customer, Visit, Question, Entry
 
 class CustomerCheckTests(TestCase):
     def test_new_customer(self):
@@ -49,3 +49,47 @@ class IndexViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Please enter your phone number")
         self.assertContains(response, "please do type in the number of people you come with")
+
+class EntryFormTests(TestCase):
+    def test_save_entry(self):
+        """
+        Given the entry post request, then should save the entry data for the new customer 
+        """
+        previous_customer_count = Customer.objects.all().count()
+        previous_entry_count = Entry.objects.all().count()
+        
+        question = Question(name="email", input_title="Email", input_type=Question.FieldInputType.EMAIL)
+        question.save()
+
+        data = {
+            'phone_number': '08128881122',
+            'group_size': 3,
+            question.name: "some@email.com"
+        }
+
+        response = self.client.post(reverse('traces:entry'), data)
+        self.assertRedirects(response, reverse('traces:welcome'), status_code=302)
+
+        entries = Entry.objects.all().reverse()
+        self.assertEqual(entries.count(), previous_entry_count + 1)
+        self.assertEqual(entries[0].customer.phone_number, data['phone_number'])
+        self.assertEqual(entries[0].question, question)
+
+        customers = Customer.objects.all().reverse()
+        self.assertEqual(customers.count(), previous_customer_count + 1)
+        self.assertEqual(customers[0].phone_number,  data['phone_number'])
+
+class EntryFormViewTests(TestCase):
+    def test_show_view(self):
+        """
+        Given the request, then should show the view with query parameter values
+        """
+        phone_number = '08128881122'
+        group_size = str(2)
+        phone_number_param = 'phone_number=' + phone_number
+        group_size_param = 'group_size=' + group_size
+
+        response = self.client.get(reverse('traces:entry') + '?' + phone_number_param + '&' + group_size_param)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, phone_number)
+        self.assertContains(response,  'name="group_size" value="' + group_size + '"')
