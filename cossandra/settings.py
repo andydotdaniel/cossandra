@@ -10,11 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Environment file
+load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -81,7 +85,7 @@ DATABASES = {
         'NAME': 'cossandra_db',
         'USER': 'root',
         'PASSWORD': 'fukcovid19',
-        'HOST': '127.0.0.1',
+        'HOST': os.getenv('DB_HOST'),
         'PORT': '3306',
     }
 }
