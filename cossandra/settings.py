@@ -79,9 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cossandra_db',
-        'USER': 'oracle',
+        'USER': 'root',
         'PASSWORD': 'fukcovid19',
-        'HOST': 'db',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
