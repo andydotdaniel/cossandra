@@ -11,7 +11,7 @@ class Echo:
 
 class Exporter:
     def __get_headers(self):
-        headers = ["phone_number"]
+        headers = ["phone_number", "group_size"]
         questions = Question.objects.all()
         for question in questions:
             headers.append(question.name)
@@ -19,7 +19,10 @@ class Exporter:
         return headers
 
     def __format_row(self, queryset):
-        row = [queryset.customer.phone_number]
+        row = [
+            queryset.customer.phone_number,
+            queryset.group_size
+        ]
 
         entry_inputs = queryset.customer.entry_set.all()
         for entry_input in entry_inputs:
