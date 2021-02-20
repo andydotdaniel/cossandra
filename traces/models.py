@@ -30,7 +30,8 @@ class Entry(models.Model):
 
 class Visit(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    group_size = models.IntegerField(default=0)
     date_created = models.DateTimeField()
 
     def __str__(self):
-        return self.customer.phone_number + ' on ' +  timezone.localtime(self.date_created).strftime('%d/%m/%Y, %H:%M:%S')
+        return self.customer.phone_number + ' on ' +  timezone.localtime(self.date_created).strftime('%d/%m/%Y, %H:%M:%S') + ' with ' + str(self.group_size) + ' people'
