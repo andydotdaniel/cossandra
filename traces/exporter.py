@@ -1,4 +1,5 @@
 import csv
+from django.utils import timezone
 from .models import Question
 
 class Echo:
@@ -11,7 +12,7 @@ class Echo:
 
 class Exporter:
     def __get_headers(self):
-        headers = ["phone_number", "group_size"]
+        headers = ["visit_time", "phone_number", "group_size"]
         questions = Question.objects.all()
         for question in questions:
             headers.append(question.name)
@@ -20,6 +21,7 @@ class Exporter:
 
     def __format_row(self, queryset):
         row = [
+            timezone.localtime(queryset.date_created).strftime('%d/%m/%Y, %H:%M:%S'),
             queryset.customer.phone_number,
             queryset.group_size
         ]
