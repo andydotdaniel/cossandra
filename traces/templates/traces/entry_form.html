@@ -29,7 +29,7 @@
             {% for question in questions %}
               <div class="col-12">
                 <label for="{{ question.name }}" class="form-label">{{ question.input_title }}</label>
-                <input type="{{ question.input_type }}" class="form-control" id="{{ question.name }}" name="{{ question.name }}" placeholder="Your answer" required>
+                <input type="{{ question.input_type }}" class="form-control" id="{{ question.name }}" name="{{ question.name }}" placeholder="Your answer" maxlength="200" max="99999999999999999999999" required>
                 <div class="invalid-feedback">
                   This field is required
                 </div>

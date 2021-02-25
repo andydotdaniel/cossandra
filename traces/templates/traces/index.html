@@ -76,7 +76,7 @@
 
         <div class="col-12">
             <label for="address" class="form-label">Please enter your phone number</label>
-            <input type="number" id="phoneNumber" class="form-control" placeholder="(e.g. 08xxxxxxxxx)" name="phone_number" required
+            <input type="number" id="phoneNumber" class="form-control" placeholder="(e.g. 08xxxxxxxxx)" name="phone_number" max="99999999999999999999999" required
                 autofocus>
             <div class="invalid-feedback">
                 This field is required
@@ -85,7 +85,7 @@
 
         <div class="col-12 mt-2">
             <label for="address" class="form-label">Alone or with Friends? please do type in the number of people you come with</label>
-            <input type="number" class="form-control" id="group_size" name="group_size" placeholder="Enter a number" required>
+            <input type="number" class="form-control" id="group_size" name="group_size" placeholder="Enter a number" max="999" required>
             <div class="invalid-feedback">
                 This field is required
             </div>
