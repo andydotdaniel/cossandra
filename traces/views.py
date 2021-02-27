@@ -1,6 +1,7 @@
 from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render, reverse
+from django.db import IntegrityError
 
 from .models import Question, Customer, Entry, Visit
 
@@ -30,19 +31,22 @@ def entry(request):
         raise Http404
 
 def __saveEntry(request):
-    now = timezone.now()
-    customer = Customer(phone_number=request.POST['phone_number'], date_created=now)
-    customer.save()
+    try:
+        now = timezone.now()
+        customer = Customer(phone_number=request.POST['phone_number'], date_created=now)
+        customer.save()
 
-    questions = Question.objects.all()
-    for question in questions:
-        entry = Entry(customer=customer, question=question, value=request.POST[question.name])
-        entry.save()
+        questions = Question.objects.all()
+        for question in questions:
+            entry = Entry(customer=customer, question=question, value=request.POST[question.name])
+            entry.save()
 
-    visit = Visit(customer=customer, group_size=request.POST['group_size'], date_created=now)
-    visit.save()
+        visit = Visit(customer=customer, group_size=request.POST['group_size'], date_created=now)
+        visit.save()
 
-    return HttpResponseRedirect(reverse('traces:welcome'))
+        return HttpResponseRedirect(reverse('traces:welcome'))
+    except IntegrityError:
+        return HttpResponseRedirect(reverse('traces:welcome'))
 
 def __showEntryForm(request):
     questions = Question.objects.all()
