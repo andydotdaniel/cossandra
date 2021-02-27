@@ -79,6 +79,23 @@ class EntryFormTests(TestCase):
         self.assertEqual(customers.count(), previous_customer_count + 1)
         self.assertEqual(customers[0].phone_number,  data['phone_number'])
 
+    def test_save_entry_when_duplicate(self):
+        """
+        Given the entry post request with duplicate phone number, then should redirect to welcome view
+        """
+
+        phone_number = '08128881122'
+        customer = Customer(phone_number=phone_number, date_created=timezone.now())
+        customer.save()
+
+        data = {
+            'phone_number': phone_number,
+            'group_size': 3,
+        }
+
+        response = self.client.post(reverse('traces:entry'), data)
+        self.assertRedirects(response, reverse('traces:welcome'), status_code=302)
+
 class EntryFormViewTests(TestCase):
     def test_show_view(self):
         """
