@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, TransactionTestCase
 from django.shortcuts import reverse
 from django.utils import timezone
 
@@ -50,7 +50,7 @@ class IndexViewTests(TestCase):
         self.assertContains(response, "Please enter your phone number")
         self.assertContains(response, "please do type in the number of people you come with")
 
-class EntryFormTests(TestCase):
+class EntryFormTests(TransactionTestCase):
     def test_save_entry(self):
         """
         Given the entry post request, then should save the entry data for the new customer 
