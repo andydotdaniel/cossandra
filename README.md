@@ -7,8 +7,9 @@ Cosssandra was built to solve the above problem, and I used one of my favorite p
 ## Running with Docker
 There are several ways to run the Cossandra app, my favorite is with [Docker](http://docker.com "Docker") because I don't like installing dependencies directly on my machine. This project already has a `docker-compose.yml` that can be used. In your terminal, run the following commands:
 
-1. `docker-compose up` to build and pull the required Docker images and set up the instance
-2. `docker-run run web python manage.py migrate` to perform the needed database migrations
-3. `docker-run run web python manage.py createsuperuser` to create a root user for the admin panel
+1. Create a `.env` file and set the `DB_HOST` key value to `db` which corresponds to the default database set in the `docker-compose.yml` file.
+2. `docker-compose up` to build and pull the required Docker images and set up the instance
+3. `docker-run run web python manage.py migrate` to perform the needed database migrations
+4. `docker-run run web python manage.py createsuperuser` to create a root user for the admin panel
 
 That should be it. The app should be running at `http://localhost:8000`.
