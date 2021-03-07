@@ -74,6 +74,11 @@
         </div>
         <h1 class="h3 mb-3 fw-normal"></h1>
 
+        {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+                So sorry! Something happened. Please try again.
+            </div>
+        {% endif %}
         <div class="col-12">
             <label for="address" class="form-label">Please enter your phone number</label>
             <input type="number" inputmode="numeric" pattern="[0-9]*" id="phoneNumber" class="form-control" placeholder="(e.g. 08xxxxxxxxx)" name="phone_number" max="99999999999999999999999" required

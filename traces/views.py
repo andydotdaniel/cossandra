@@ -9,8 +9,12 @@ def index(request):
     return render(request, 'traces/index.html')
 
 def check(request):
-    phone_number = request.POST['phone_number']
-    group_size = request.POST['group_size']
+    try:
+        phone_number = request.POST['phone_number']
+        group_size = request.POST['group_size']
+    except (KeyError):
+        return render(request, 'traces/index.html', { 'error_message': True })
+
     try:
         customer = Customer.objects.get(phone_number=phone_number)
     except (KeyError, Customer.DoesNotExist):
