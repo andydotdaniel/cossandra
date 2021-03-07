@@ -40,6 +40,13 @@ class CustomerCheckTests(TestCase):
         self.assertEqual(visits[0].group_size, group_size)
         self.assertEqual(visits[0].customer, customer)
 
+    def test_key_error(self):
+        """
+        Given a check request with an invalid key error, then should show error message in check form view
+        """
+        response = self.client.post(reverse('traces:check'), { 'invalid_key': '08128881122', 'group_size': 0 })
+        self.assertContains(response, "So sorry! Something happened. Please try again.")
+
 class IndexViewTests(TestCase):
     def test_show_view(self):
         """

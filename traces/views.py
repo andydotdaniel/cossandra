@@ -2,6 +2,7 @@ from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render, reverse
 from django.db import IntegrityError
+from django.utils.datastructures import MultiValueDictKeyError
 
 from .models import Question, Customer, Entry, Visit
 
@@ -12,7 +13,7 @@ def check(request):
     try:
         phone_number = request.POST['phone_number']
         group_size = request.POST['group_size']
-    except (KeyError):
+    except (KeyError, MultiValueDictKeyError):
         return render(request, 'traces/index.html', { 'error_message': True })
 
     try:
